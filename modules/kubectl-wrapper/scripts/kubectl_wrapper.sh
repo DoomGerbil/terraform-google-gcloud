@@ -67,7 +67,15 @@ else
         CMD+=" --internal-ip"
     fi
 
+    echo "DEBUG: Pre-exec contents of kubeconfig (${KUBECONFIG})"
+    kubectl config view
+
+    echo "Executing ${CMD}"
     $CMD
+    sleep 1
+
+    echo "DEBUG: Post-exec contents of kubeconfig (${KUBECONFIG})"
+    kubectl config view
 
     "$@"
 fi
